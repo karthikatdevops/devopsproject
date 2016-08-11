@@ -1,0 +1,51 @@
+Ec2-> launch instance -> configuring instance
+
+                                       1) no.of instances - 1
+                                       2) Network - default
+                                       3) subnet - default
+                                       4) Enable protect against
+-> configure group -> class -> SSH enable
+
+Launch -> get the key pair (.pem)
+login to putty using host name = ec2-user@ip address
+convert .pem file to .ppk using puttygen
+login and go to root= sudo su -
+
+-> yum update
+-> yum install -y puppet3-server
+-> service puppet status
+-> service puppet start
+-> gem install aws-sdk-core
+-> gem install retries
+
+go to aws website -> my accounts -> security credentials -> create user -> copy the key
+
+go to putty -> go to root -> mkdir .aws -> cd .aws/ -> vim credentials 
+
+-> paste user key in following format
+
+aws_access_key_id=........................
+aws_secret_access_key=..................
+
+go to root -> run the following 
+
+service puppet status
+service puppet start
+export AWS_ACCESS_KEY_ID=...............................
+export AWS_SECRET_ACCESS_KEY=....................
+service puppet restart
+
+-> puppet module install puppetlabs-aws
+
+-> check this directory is present = /etc/puppet/modules
+
+-> go to root
+
+ssh-keygen
+cat ~/.ssh/id_rsa.pub -> copy the code
+
+-> go to console -> security credentials -> user -> security -> upload ssh public key -> paste it
+
+-> go to console -> actions -> image -> create image -> no reboot
+-> go to images -> AMI`S -> select image -> indetails -> select "Image AMI IP" -> copy it
+
